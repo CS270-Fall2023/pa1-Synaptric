@@ -2,90 +2,78 @@
 
 int getTokens(char *s, char ***args)
 {
-    int tokenNum =0; // Will be returned at the end of the programn 
-    
-    char delim = ' '; //used for a space which seperates tokens 
 
-  
-    //check if array is in bound 
-    
-     int delimcount=0; // number of delimiters 
+    char delim = ' '; // used for a space which seperates tokens
 
 
-    int maxLength=0; //The length of the longest words used to make the pointer array 
+    int delimcount = 0; // number of delimiters
 
-     //This could probably be seperated function but not at the moment 
+    // This could probably be seperated function but not at the moment
 
-     //Finds the length of the largeset word and the numbet of spaces 
+    // Finds the length of the largeset word and the numbet of spaces
 
+    for (int i = 0; s[i] != '\0'; i++)
+    {
 
-    for(int i=0;s[i]!='\0';i++)
-    {   
-        
-       if(s[i]==delim)
-       {
-            
-            delimcount=delimcount+1;
-             printf("\n %d",delimcount); //counting the number of delimiters which are spaces 
-       }
+        if (s[i] == delim)
+        {
 
-       
+            delimcount = delimcount + 1;
+            printf("\n %d", delimcount); // counting the number of delimiters which are spaces
+        }
     }
 
-    int numOfElm =delimcount +1 ;  //The number of elements 
+    int tokenNum = delimcount + 1; // The number of elements
 
-    *args =malloc(numOfElm*sizeof(char *));
-    
-     
+   // *args = malloc((tokenNum+1) * sizeof(char *));
+    char * array[tokenNum+1];
+    *args = array;
 
+    int count = 0;
 
-        int j=0;
-        int count=0;
-     
-         int  i=0;
-        int readNum =0;
-        printf("\n The Delimcount is %d ",delimcount);
-        tokenNum=delimcount+1;
+    int i = 0;
+    int readNum = 0;
+    int begin = 0;
+    int numOfchar;
+    // printf("\n The Delimcount is %d ",delimcount);
 
-
-            while(count<tokenNum)
-            { 
-                maxLength=0;       
-
-                while(s[readNum] != delim)
-
-                {   
-                    maxLength++;
-
-                }
-                 
-                  (*args)[i]=malloc(maxLength * sizeof(char));
+    while (count < tokenNum)
+    {
+        numOfchar = 0;
 
 
-                j++;
-                i++;
-                readNum++;
-                printf(" \nThe count is %d",count);
-                count++;
-            }
-        return tokenNum;
+        while (s[readNum] != delim && s[readNum] != '\0')
+        {
+            readNum++;
+       
+            numOfchar++;
+        }
+
+        (*args)[i] = malloc(numOfchar + 1 * sizeof(char));
+        strncpy(((*args)[i]), (&s[begin]), numOfchar);
+
+        printf("\n %s", (*args)[i]);
+        i++;
+        begin = numOfchar + 2;
+        readNum += 1;
+        printf(" \nThe count is %d", count);
+        count++;
+    }
+
+    return tokenNum;
 }
 
-
-
-
-
-
-
-
-
-//The Junk Drawer
-
-
-
+// The Junk Drawer
 
 /*
-TheTokenClub[0]   ="Testing to see if this works as a two dimensional array";       
+
+
+                                     printf("\n  String 1 =  %s",&s[begin]);
+
+                 printf("\n  String 1 =  %s",*args[i]);
+
+
+TheTokenClub[0]   ="Testing to see if this works as a two dimensional array";
    TheTokenClub[1] ="Really testing this";
 
     int u=0;
@@ -96,10 +84,8 @@ TheTokenClub[0]   ="Testing to see if this works as a two dimensional array";
 
 */
 
-  //char* token;
-    //token =(char*)malloc(50*sizeof(char));
-
-
+// char* token;
+// token =(char*)malloc(50*sizeof(char));
 
 /*
     if(*token != '\0')
@@ -112,7 +98,4 @@ TheTokenClub[0]   ="Testing to see if this works as a two dimensional array";
     }
 */
 
-
-
-
-//Trying to read into array of strings 
+// Trying to read into array of strings
