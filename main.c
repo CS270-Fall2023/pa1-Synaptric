@@ -1,11 +1,16 @@
 #include <stdio.h>
-
+#include <stdlib.h>
+#include "parse.h"
 int main()
 {
-    char **arrayOfTokens, str[] = "ls -l file";
+    char **arrayOfTokens, str[] = "piggyandpigsandhogsanddogsandcats -l file";
     int numberOfTokens;
-    numberOfTokens = getTokens(str, &arrayOfTokens);
+
     printf("Please enter the string: ");
-    printf("Number of tokens: ");
+    printf("Number of tokens: \n");
+    numberOfTokens = getTokens(str, &arrayOfTokens);
+    
+
+    
     return 0;
 }
