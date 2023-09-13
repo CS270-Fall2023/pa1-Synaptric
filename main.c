@@ -3,7 +3,7 @@
 #include "parse.h"
 int main()
 {
-    char **arrayOfTokens, str[] = "piggyandpigsandhogsanddogsandcats -l file";
+    char **arrayOfTokens, str[] = "piggy -l file";
     int numberOfTokens;
 
     printf("Please enter the string: ");
