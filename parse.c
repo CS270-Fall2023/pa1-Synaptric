@@ -6,6 +6,7 @@ int getTokens(char *s, char ***args)
     char delim = ' '; // used for a space which seperates tokens
 
 
+    char *null='\0';
     int delimcount = 0; // number of delimiters
 
     // This could probably be seperated function but not at the moment
@@ -19,7 +20,6 @@ int getTokens(char *s, char ***args)
         {
 
             delimcount = delimcount + 1;
-            printf("\n %d", delimcount); // counting the number of delimiters which are spaces
         }
     }
 
@@ -52,12 +52,12 @@ int getTokens(char *s, char ***args)
         (*args)[i] = malloc(numOfchar + 1 * sizeof(char));
         strncpy(((*args)[i]), (&s[begin]), numOfchar);
 
+        
         printf("\n %s", (*args)[i]);
         i++;
-        begin = numOfchar + 2;
+        begin = numOfchar+begin+1;
         readNum += 1;
-        printf(" \nThe count is %d", count);
-        count++;
+         count++;
     }
 
     return tokenNum;
