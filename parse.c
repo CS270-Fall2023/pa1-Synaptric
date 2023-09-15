@@ -39,9 +39,16 @@ int getTokens(char *s, char ***args)
     int numOfchar;
     // printf("\n The Delimcount is %d ",delimcount);
 
-    while (count <= tokenNum)
+    while (count <= tokenNum) // Large while loop that is used  for the primary program 
     {
         numOfchar = 0; // Number of charcthers to be printed in each token.
+        
+        while((s[readNum])==delim) //If the next word starts with a space 
+        {
+            readNum++; //Move number until it is no longer reading a space
+
+            begin++;
+        }
 
         while (s[readNum] != delim && s[readNum] != '\0')
         {
@@ -49,14 +56,6 @@ int getTokens(char *s, char ***args)
             numOfchar++; // Number of charcters in each token
         }
 
-        while (s[readNum + 1] == delim)
-        {
-            readNum++;
-            if (begin > 0)
-            {
-                begin++;
-            }
-        }
         
         if (s[readNum] == '\0')
         {
@@ -70,8 +69,7 @@ int getTokens(char *s, char ***args)
         // printf("\n %s", (*args)[i]); used for testing porpouses.
 
         i++;
-        begin = numOfchar + begin + 1;
-        readNum += 1;
+        begin = numOfchar + begin;
         count++;
     }
 
