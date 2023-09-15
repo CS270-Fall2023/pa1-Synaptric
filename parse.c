@@ -11,14 +11,14 @@ int getTokens(char *s, char ***args)
 
     // Finds the length of the largeset word and the numbet of spaces
 
-    for (int i = 0; s[i] != '\0'; i++)
+    for (int i = 0; s[i] != '\0'; i++) // This is used to find the number of tokens
     {
 
-        if (s[i] == delim)
+        if (s[i] == delim) // counts each space
         {
 
             delimcount = delimcount + 1;
-            while (s[i + 1] == delim)
+            while (s[i + 1] == delim) // If there is more than one space in a row it won't count multiple spaces as tokens
             {
                 i++;
             }
@@ -27,27 +27,23 @@ int getTokens(char *s, char ***args)
 
     int tokenNum = delimcount + 1; // The number of elements
 
-    *args = calloc((tokenNum + 1), sizeof(char *));
-    // char * array[tokenNum+1];
-    //*args = array;
+    *args = calloc((tokenNum + 1), sizeof(char *)); // Allocates enough space for each token and a null terminator at the end of set
 
-    int count = 0;
-
+    int count = 0; // Counters for the loop
     int i = 0;
     int readNum = 0;
     int begin = 0;
     int numOfchar;
-    // printf("\n The Delimcount is %d ",delimcount);
 
-    while (count <= tokenNum) // Large while loop that is used  for the primary program 
+    while (count <= tokenNum) // Large while loop that is used  for the primary program
     {
         numOfchar = 0; // Number of charcthers to be printed in each token.
-        
-        while((s[readNum])==delim) //If the next word starts with a space 
-        {
-            readNum++; //Move number until it is no longer reading a space
 
-            begin++;
+        while ((s[readNum]) == delim) // If the next word starts with a space
+        {
+            readNum++; // Move number until it is no longer reading a space
+
+            begin++; // Moves the start of the next string to e printed.
         }
 
         while (s[readNum] != delim && s[readNum] != '\0')
@@ -56,12 +52,12 @@ int getTokens(char *s, char ***args)
             numOfchar++; // Number of charcters in each token
         }
 
-        
-        if (s[readNum] == '\0')
+        if (s[readNum] == '\0') //
         {
             (*args)[i] = calloc(1, sizeof(char));            // Assigns memory to a string based off of number of charcters
             strncpy(((*args)[i]), (&s[readNum]), numOfchar); // Nees
         }
+        
         (*args)[i] = calloc(numOfchar + 1, sizeof(char)); // Assigns memory to a string based off of number of charcters
         strncpy(((*args)[i]), (&s[begin]), numOfchar);    // Nees
         (*args)[i][numOfchar] = '\0';
@@ -69,46 +65,9 @@ int getTokens(char *s, char ***args)
         // printf("\n %s", (*args)[i]); used for testing porpouses.
 
         i++;
-        begin = numOfchar + begin;
+        begin = numOfchar + begin; // Moves begin to the next level of priting
         count++;
     }
 
     return tokenNum;
 }
-
-// The Junk Drawer
-
-/*
-
-
-                                     printf("\n  String 1 =  %s",&s[begin]);
-
-                 printf("\n  String 1 =  %s",*args[i]);
-
-
-TheTokenClub[0]   ="Testing to see if this works as a two dimensional array";
-   TheTokenClub[1] ="Really testing this";
-
-    int u=0;
-    int b=0;
-    printf("%s",&TheTokenClub[u][b]);
-    u++;
-     printf("%s",&TheTokenClub[u][b]);
-
-*/
-
-// char* token;
-// token =(char*)malloc(50*sizeof(char));
-
-/*
-    if(*token != '\0')
-    {
-        printf("token created");
-    }
-    else
-    {
-        printf("creation failed");
-    }
-*/
-
-// Trying to read into array of strings
