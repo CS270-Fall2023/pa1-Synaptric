@@ -3,14 +3,30 @@
 #include "parse.h"
 int main()
 {
-    char **arrayOfTokens, str[] = "Testing to see if this stil works ";
-    int numberOfTokens;
+  char **arrayOfTokens;
+  char str[256] = "       ";
+  int numberOfTokens;
 
-    printf("Please enter the string: ");
-    printf("Number of tokens: \n");
-    numberOfTokens = getTokens(str, &arrayOfTokens);
+  printf("Please enter the string: ");
+  fgets(str, 256, stdin);
+
+  numberOfTokens = getTokens(str, &arrayOfTokens);
+  printf("Number of tokens: %d \n", numberOfTokens);
+
+  for (int i = 0; i <= numberOfTokens; i++)
+  {
+
+    int PrintNum = i + 1;
+    
+    if (*arrayOfTokens[i] == '\0')
+    {
+      printf("Token %d: (null)", PrintNum);
+      break;
+    }
+
     
 
-    
-    return 0;
+    printf("\nToken %d: %s ", PrintNum, (arrayOfTokens)[i]);
+  }
+  return 0;
 }

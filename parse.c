@@ -5,8 +5,6 @@ int getTokens(char *s, char ***args)
 
     char delim = ' '; // used for a space which seperates tokens
 
-
-    char *null='\0';
     int delimcount = 0; // number of delimiters
 
     // This could probably be seperated function but not at the moment
@@ -25,9 +23,9 @@ int getTokens(char *s, char ***args)
 
     int tokenNum = delimcount + 1; // The number of elements
 
-   // *args = malloc((tokenNum+1) * sizeof(char *));
-    char * array[tokenNum+1];
-    *args = array;
+    *args = calloc((tokenNum + 1), sizeof(char *));
+    // char * array[tokenNum+1];
+    //*args = array;
 
     int count = 0;
 
@@ -37,28 +35,36 @@ int getTokens(char *s, char ***args)
     int numOfchar;
     // printf("\n The Delimcount is %d ",delimcount);
 
-    while (count < tokenNum)
+    while (count <= tokenNum)
     {
-        numOfchar = 0;
-
+        numOfchar = 0; // Number of charcthers to be printed in each token.
 
         while (s[readNum] != delim && s[readNum] != '\0')
         {
-            readNum++;
-       
-            numOfchar++;
+            readNum++; // The current charchter being read from the original string 
+            numOfchar++;  //Number of charcters in each token 
         }
 
-        (*args)[i] = malloc(numOfchar + 1 * sizeof(char));
-        strncpy(((*args)[i]), (&s[begin]), numOfchar);
+
+        if(s[readNum] == '\0')
+        {
+             (*args)[i] = calloc(1, sizeof(char)); //Assigns memory to a string based off of number of charcters 
+               strncpy(((*args)[i]), (&s[readNum]), numOfchar); //Nees 
+        }
+        (*args)[i] = calloc(numOfchar + 1, sizeof(char)); //Assigns memory to a string based off of number of charcters 
+        strncpy(((*args)[i]), (&s[begin]), numOfchar); //Nees 
+        (*args)[i][numOfchar]='\0';
 
         
-        printf("\n %s", (*args)[i]);
+                                   //printf("\n %s", (*args)[i]); used for testing porpouses. 
+
         i++;
-        begin = numOfchar+begin+1;
+        begin = numOfchar + begin + 1;
         readNum += 1;
-         count++;
+        count++;
     }
+     
+
 
     return tokenNum;
 }
