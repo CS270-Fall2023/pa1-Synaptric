@@ -18,6 +18,10 @@ int getTokens(char *s, char ***args)
         {
 
             delimcount = delimcount + 1;
+            while (s[i + 1] == delim)
+            {
+                i++;
+            }
         }
     }
 
@@ -41,30 +45,35 @@ int getTokens(char *s, char ***args)
 
         while (s[readNum] != delim && s[readNum] != '\0')
         {
-            readNum++; // The current charchter being read from the original string 
-            numOfchar++;  //Number of charcters in each token 
+            readNum++;   // The current charchter being read from the original string
+            numOfchar++; // Number of charcters in each token
         }
 
-
-        if(s[readNum] == '\0')
+        while (s[readNum + 1] == delim)
         {
-             (*args)[i] = calloc(1, sizeof(char)); //Assigns memory to a string based off of number of charcters 
-               strncpy(((*args)[i]), (&s[readNum]), numOfchar); //Nees 
+            readNum++;
+            if (begin > 0)
+            {
+                begin++;
+            }
         }
-        (*args)[i] = calloc(numOfchar + 1, sizeof(char)); //Assigns memory to a string based off of number of charcters 
-        strncpy(((*args)[i]), (&s[begin]), numOfchar); //Nees 
-        (*args)[i][numOfchar]='\0';
-
         
-                                   //printf("\n %s", (*args)[i]); used for testing porpouses. 
+        if (s[readNum] == '\0')
+        {
+            (*args)[i] = calloc(1, sizeof(char));            // Assigns memory to a string based off of number of charcters
+            strncpy(((*args)[i]), (&s[readNum]), numOfchar); // Nees
+        }
+        (*args)[i] = calloc(numOfchar + 1, sizeof(char)); // Assigns memory to a string based off of number of charcters
+        strncpy(((*args)[i]), (&s[begin]), numOfchar);    // Nees
+        (*args)[i][numOfchar] = '\0';
+
+        // printf("\n %s", (*args)[i]); used for testing porpouses.
 
         i++;
         begin = numOfchar + begin + 1;
         readNum += 1;
         count++;
     }
-     
-
 
     return tokenNum;
 }
