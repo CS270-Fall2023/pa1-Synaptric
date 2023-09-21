@@ -6,3 +6,8 @@ main.o: main.c parse.h
 
 parse.o: parse.c parse.h
 		gcc -Wall -c parse.c
+
+all: tokenize
+
+clean:
+	rm -f tokenize *.o
