@@ -1,11 +1,21 @@
+# Macros
+CC = gcc
+CFLAGS = -Wall
+# CFLAGS = -g
+# CFLAGS = -D NDEBUG
+# CFLAGS = -D NDEBUG -O
+# CFLAGS = -std=c90 -Wall -Wextra
+
+
+
 tokenize:main.o parse.o 
-	gcc main.o parse.o -o tokenize
+	$(CC) $(CFLAGS)  main.o parse.o -o tokenize
 
 main.o: main.c parse.h
-		gcc -Wall -c main.c
+	$(CC) $(CFLAGS)  -c main.c
 
 parse.o: parse.c parse.h
-		gcc -Wall -c parse.c
+	$(CC) $(CFLAGS)  -c parse.c
 
 all: tokenize
 
